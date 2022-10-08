@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import Link from 'next/link';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const Wrapper = styled(Box)(() => ({
   height: '100vh',
@@ -95,7 +96,9 @@ export const DefaultLayout = ({ children }) => {
           {isGreaterThanSmBreakpoint
             ? <Menu />
             : <>
-                <Button onClick={() => setIsMenuOpen(prev => !prev)}>Menu</Button>
+                <Button onClick={() => setIsMenuOpen(prev => !prev)}>
+                  <MenuIcon sx={{ fontSize: '24px', color: '#fff' }} />
+                </Button>
                 <Drawer
                   anchor="right"
                   open={isMenuOpen}

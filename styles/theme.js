@@ -9,21 +9,23 @@ export const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#F1A10A",
+      main: '#F1A10A',
+      light: '#ffd859',
     },
     secondary: {
-      main: "#032937",
+      main: '#032937',
     },
     text: {
-      main: "#2D2D2D",
+      main: '#2D2D2D',
     },
     neutral: {
       main: '#2D2D2D',
     },
-    placeholder: "#00000077",
+    placeholder: '#00000077',
   },
   typography: {
     fontSize: '14px',
+    color: '#2D2D2D',
     fontFamily: `'Rubik', Segoe UI, Roboto, Helvetica Neue, sans-serif`,
     h1: {
       fontSize: '22px',

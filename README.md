@@ -12,7 +12,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Development Steps/Decisions:
 
-- First I decided to use **Next.js** framework because it has built in routing feature;
-- Also I decided to use **MUI** to help me with **grids**, **modals**(contact modal) and **theming**(Emotion);
-- Then I started doing the base(fonts, theme, header, default layout);
--
+- 1) I decided to use **Next.js** framework because it has built in routing feature;
+- 2) I decided to use **MUI** to help me with **grids**, **modals**(contact modal) and **theming**(Emotion);
+- 3) Then I started doing the base(fonts, theme, header, default layout);
+- 4) Posts List (only front-end);
