@@ -3,9 +3,10 @@ import '@fontsource/rubik/500.css';
 import '@fontsource/rubik/700.css';
 import Head from 'next/head';
 import { ThemeProvider } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from "@emotion/react";
 import { theme } from '../styles/theme';
-import '../styles/globals.css';
+import '../styles/reset.css';
 import createEmotionCache from '../utils/createEmotionCache';
 
 const clientSideEmotionCache = createEmotionCache();
@@ -20,6 +21,7 @@ function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }) 
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Component {...pageProps} />
       </ThemeProvider>
     </CacheProvider>

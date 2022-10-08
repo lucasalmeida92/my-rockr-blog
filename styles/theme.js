@@ -1,6 +1,12 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme } from '@mui/material/styles';
+import { globalStyles } from './globalStyles';
 
 export const theme = createTheme({
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: globalStyles,
+    },
+  },
   palette: {
     primary: {
       main: "#F1A10A",
@@ -20,7 +26,7 @@ export const theme = createTheme({
     fontSize: '14px',
     fontFamily: `'Rubik', Segoe UI, Roboto, Helvetica Neue, sans-serif`,
     h1: {
-      fontSize: '20px',
+      fontSize: '22px',
       fontWeight: '700',
     },
     button: {
