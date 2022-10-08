@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "export": "next export",
+    "lint": "next lint",
+    "deploy-staging": "npm run build && npm run export && surge -d https://myrockrblog.surge.sh -p out"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",

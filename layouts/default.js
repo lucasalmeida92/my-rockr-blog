@@ -30,6 +30,7 @@ const Header = styled(Box)(({ theme }) => ({
 const PageContentWrapper = styled(Box)(() => ({
   gridArea: 'main',
   overflowY: 'auto',
+  overflowX: 'hidden',
 }));
 
 export const DefaultLayout = ({ children }) => {

@@ -28,4 +28,4 @@ function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }) 
   );
 }
 
-export default MyApp
+export default MyApp;

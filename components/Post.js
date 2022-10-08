@@ -6,6 +6,7 @@ import {
   Typography,
 } from '@mui/material';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+import removeTags from '../utils/removeTags';
 
 const Wrapper = styled(Card)(({ theme }) => ({
   display: 'flex',
@@ -21,7 +22,10 @@ const Wrapper = styled(Card)(({ theme }) => ({
   '&:hover': {
     transform: 'scale(1.01)',
     'h2': {
-      textShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
+      textShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+    },
+    'svg': {
+      transform: 'translateX(4px) scale(1.2)',
     },
   },
 }));
@@ -52,7 +56,7 @@ export const Post = ({ post }) => {
       <StyledCardMedia
         component="img"
         className="postImage"
-        image={post.image}
+        image={post.imageUrl}
         alt="Post image"
       />
       <StyledCardContent className="postContent">
@@ -67,7 +71,14 @@ export const Post = ({ post }) => {
           component="h2"
           variant="h1"
           color="primary"
-          sx={{ mb: 1, transition: '200ms all ease-out' }}
+          sx={{
+            mb: 1,
+            transition: '200ms all ease-out',
+            overflow: 'hidden',
+            display: '-webkit-box',
+            '-webkit-line-clamp': '2',
+            '-webkit-box-orient': 'vertical',
+          }}
         >
           {post.title}
         </Typography>
@@ -80,7 +91,7 @@ export const Post = ({ post }) => {
             '-webkit-box-orient': 'vertical',
           }}
         >
-          {post.text}
+          {removeTags(post.article)}
         </Typography>
         <DoubleArrowIcon
           color="secondary"
@@ -88,6 +99,7 @@ export const Post = ({ post }) => {
             position: 'absolute',
             right: '24px',
             bottom: '24px',
+            transition: '150ms all ease-out',
           }}
         />
       </StyledCardContent>
