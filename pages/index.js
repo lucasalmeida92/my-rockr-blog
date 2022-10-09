@@ -45,7 +45,7 @@ const GridItem = styled(Grid)(({ theme }) => ({
   },
 }));
 
-export default function Home() {
+export default function HomePage() {
   const [posts, setPosts] = useState(null);
   const [hasError, setHasError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);

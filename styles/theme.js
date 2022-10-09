@@ -33,15 +33,15 @@ export const theme = createTheme({
     placeholder: '#00000077',
   },
   typography: {
-    fontSize: '14px',
+    fontSize: 14,
     color: '#2D2D2D',
     fontFamily: `'Rubik', Segoe UI, Roboto, Helvetica Neue, sans-serif`,
     h1: {
-      fontSize: '22px',
+      fontSize: 22,
       fontWeight: '700',
     },
     button: {
-      fontSize: '14px',
+      fontSize: 14,
     },
   },
 });
