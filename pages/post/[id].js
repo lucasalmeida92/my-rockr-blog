@@ -13,6 +13,8 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import removeTags from '../../utils/removeTags';
+import { Loading } from '../../components/Loading';
+
 
 const Wrapper = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -65,7 +67,7 @@ export default function PostPage() {
   const { id: postId } = router.query;
   const [post, setPost] = useState(null);
   const [hasError, setHasError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -78,7 +80,9 @@ export default function PostPage() {
 
   useEffect(() => {
     if(!postId) return;
+
     setIsLoading(true);
+
     const url =
       `https://stormy-shelf-93141.herokuapp.com/articles?id=${postId}`;
 
@@ -106,10 +110,8 @@ export default function PostPage() {
 
       <Container maxWidth="md">
         <Box sx={{ mt: [2, 7], backgroundColor: '#fff' }}>
-          {isLoading &&
-            <Box sx={{ display: 'flex' }}>
-              <CircularProgress />
-            </Box>}
+
+          {isLoading && <Loading color="primary" />}
 
           {(!hasError && post) &&
             (
@@ -154,7 +156,7 @@ export default function PostPage() {
           {hasError &&
             <p>It was not possible to load the post. Try again later</p>}
 
-          {(!hasError && !post) &&
+          {(!hasError && !post && !isLoading) &&
             <p>No post found.</p>}
         </Box>
       </Container>

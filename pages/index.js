@@ -9,6 +9,7 @@ import {
 import { styled } from '@mui/material/styles';
 import Link from 'next/link';
 import { Post } from '../components/Post';
+import { Loading } from '../components/Loading';
 
 const GridItem = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
@@ -122,10 +123,7 @@ export default function HomePage() {
           ))}
         </Grid>}
 
-      {isLoading &&
-        <Box sx={{ display: 'flex' }}>
-          <CircularProgress color="primary" />
-        </Box>}
+      {isLoading && <Loading />}
     </DefaultLayout>
   )
 }
