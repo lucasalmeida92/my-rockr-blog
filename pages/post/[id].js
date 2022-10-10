@@ -77,6 +77,7 @@ export default function PostPage() {
   }
 
   useEffect(() => {
+    if(!postId) return;
     setIsLoading(true);
     const url =
       `https://stormy-shelf-93141.herokuapp.com/articles?id=${postId}`;

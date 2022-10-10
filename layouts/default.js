@@ -10,6 +10,7 @@ import {
 import Link from 'next/link';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import MenuIcon from '@mui/icons-material/Menu';
+import { ContactModal } from '../components/ContactModal';
 
 const Wrapper = styled(Box)(() => ({
   height: '100vh',
@@ -37,6 +38,7 @@ export const DefaultLayout = ({ children }) => {
   const theme = useTheme();
   const isGreaterThanSmBreakpoint = useMediaQuery(theme.breakpoints.up('sm'));
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   const Menu = () => (
     <Box
@@ -65,13 +67,20 @@ export const DefaultLayout = ({ children }) => {
     >
       <li>
         <Link href="/">
-          <a title="Posts" onClose={() => setIsMenuOpen(false)}>Posts</a>
+          <a title="Posts" onClick={() => setIsMenuOpen(false)}>Posts</a>
         </Link>
       </li>
       <li>
-        <Link href="/contact">
-          <a title="Contact" onClose={() => setIsMenuOpen(false)}>Contact</a>
-        </Link>
+        <a
+          title="Contact"
+          href="#"
+          onClick={() => {
+            setIsContactOpen(true);
+            setIsMenuOpen(false);
+          }}
+        >
+          Contact
+        </a>
       </li>
     </Box>
   );
@@ -114,6 +123,10 @@ export const DefaultLayout = ({ children }) => {
       <PageContentWrapper component="main">
         {children}
       </PageContentWrapper>
+      <ContactModal
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+      />
     </Wrapper>
   );
 };
