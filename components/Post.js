@@ -80,7 +80,7 @@ export const Post = ({ post }) => {
             '-webkit-box-orient': 'vertical',
           }}
         >
-          {post.title}
+          {removeTags(post.title)}
         </Typography>
         <Typography
           component="p"

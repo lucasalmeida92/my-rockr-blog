@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Head from 'next/head';
 import { DefaultLayout } from '../layouts/default';
 import {
@@ -46,48 +46,71 @@ const GridItem = styled(Grid)(({ theme }) => ({
 }));
 
 export default function HomePage() {
+  const effectRanFirsTime = useRef(false);
   const [posts, setPosts] = useState(null);
   const [hasError, setHasError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const postsByPage = 10;
+  const postsListEl = useRef(null);
+  const postsByPage = 5;
 
-  useEffect(() => {
+  const fetchData = useCallback(async () => {
+    console.log('fetchData()');
     setIsLoading(true);
+
     const url =
       `https://stormy-shelf-93141.herokuapp.com/articles?_page=${currentPage}&_limit=${postsByPage}`;
 
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url);
-        const json = await response.json();
+    try {
+      const response = await fetch(url);
+      const json = await response.json();
 
-        setPosts(json);
-      } catch (error) {
-          console.log('error', error);
-          setHasError(error);
-      }
-    };
+      setPosts(prev => ([...(prev || []), ...json]));
+    } catch (error) {
+        console.log('Error loading posts: ', error);
+        setHasError(error);
+    }
+
+    setIsLoading(false);
+  }, [currentPage]);
+
+  useEffect(() => {
+    if(effectRanFirsTime.current) return;
 
     fetchData();
-    setIsLoading(false);
+
+    return () => effectRanFirsTime.current = true;
   }, []);
 
+  function handleScroll(e) {
+    if (
+      e.currentTarget.scrollTop + e.currentTarget.offsetHeight !==
+      postsListEl.current.offsetHeight
+    ) return;
 
+    setCurrentPage(prev => prev + 1);
+    fetchData();
+  }
 
   return (
-    <DefaultLayout>
+    <DefaultLayout contentWrapperProps={{onScroll: handleScroll}}>
       <Head>
         <title>My Rockr Blog - Home</title>
       </Head>
 
-      {isLoading &&
-        <Box sx={{ display: 'flex' }}>
-          <CircularProgress />
-        </Box>}
+      {hasError &&
+        <p>It was not possible to load Posts. Try again later</p>}
+
+      {(!hasError && posts?.length === 0) &&
+        <p>No posts found.</p>}
 
       {(!hasError && posts && posts.length !== 0) &&
-        <Grid container spacing={0} sx={{ mt: 4 }}>
+        <Grid
+          ref={postsListEl}
+          container
+          spacing={0}
+          sx={{ pt: 4 }}
+        >
           {posts.map(item => (
             <GridItem key={item.id} item md={6}>
               <Link href={`/post/${item.id}`}>
@@ -99,11 +122,10 @@ export default function HomePage() {
           ))}
         </Grid>}
 
-      {hasError &&
-        <p>It was not possible to load Posts. Try again later</p>}
-
-      {(!hasError && posts?.length === 0) &&
-        <p>No posts found.</p>}
+      {isLoading &&
+        <Box sx={{ display: 'flex' }}>
+          <CircularProgress color="primary" />
+        </Box>}
     </DefaultLayout>
   )
 }

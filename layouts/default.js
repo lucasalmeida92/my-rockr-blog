@@ -34,7 +34,7 @@ const PageContentWrapper = styled(Box)(() => ({
   overflowX: 'hidden',
 }));
 
-export const DefaultLayout = ({ children }) => {
+export const DefaultLayout = ({ children, contentWrapperProps }) => {
   const theme = useTheme();
   const isGreaterThanSmBreakpoint = useMediaQuery(theme.breakpoints.up('sm'));
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -120,7 +120,7 @@ export const DefaultLayout = ({ children }) => {
           }
         </Container>
       </Header>
-      <PageContentWrapper component="main">
+      <PageContentWrapper component="main" {...contentWrapperProps}>
         {children}
       </PageContentWrapper>
       <ContactModal
