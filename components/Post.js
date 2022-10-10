@@ -50,6 +50,17 @@ const StyledCardMedia = styled(CardMedia)(({ theme }) => ({
   },
 }));
 
+const DoubleArrow = styled(DoubleArrowIcon)(({ theme }) => ({
+  position: 'absolute',
+  right: '24px',
+  bottom: '24px',
+  transition: '150ms all ease-out',
+  [theme.breakpoints.down('sm')]: {
+    right: '16px',
+    top: '12px',
+  },
+}));
+
 export const Post = ({ post }) => {
   return (
     <Wrapper component="article" className="post">
@@ -93,15 +104,7 @@ export const Post = ({ post }) => {
         >
           {removeTags(post.article)}
         </Typography>
-        <DoubleArrowIcon
-          color="secondary"
-          sx={{
-            position: 'absolute',
-            right: '24px',
-            bottom: '24px',
-            transition: '150ms all ease-out',
-          }}
-        />
+        <DoubleArrow color="secondary" />
       </StyledCardContent>
     </Wrapper>
   );
